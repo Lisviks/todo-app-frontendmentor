@@ -99,7 +99,7 @@ header {
     font-size: 0.75rem;
     line-height: 0.75rem;
     letter-spacing: -0.166667px;
-    color: $dark-grayish-blue;
+    color: $very-dark-grayish-blue;
 
     &:focus {
       outline: none;
@@ -135,7 +135,7 @@ header {
       line-height: 0.75rem;
       letter-spacing: -0.166667px;
       color: $very-dark-grayish-blue;
-      margin-left: 2rem;
+      margin-left: 0.75rem;
     }
 
     img {
@@ -200,6 +200,82 @@ header {
 }
 
 @media (min-width: 550px) {
+  .bg_image {
+    background: url('../../public/images/bg-desktop-light.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 300px;
+  }
+
+  .app {
+    margin: 4.375rem auto 0;
+    max-width: 33.75rem;
+
+    & > p {
+      margin-top: 3.125rem;
+    }
+  }
+
+  header {
+    margin-bottom: 3rem;
+
+    .logo {
+      font-size: 2.5rem;
+      line-height: 2.5rem;
+      letter-spacing: 15px;
+    }
+
+    .theme-switch {
+      height: 26px;
+      width: 26px;
+    }
+  }
+
+  .checkbox {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  .input-field {
+    position: relative;
+    margin-bottom: 1.5rem;
+
+    input {
+      height: 4rem;
+      padding: 0 1.5rem 0 4.5rem;
+      font-size: 1.125rem;
+      line-height: 1.125rem;
+      letter-spacing: -0.25px;
+      color: $very-dark-grayish-blue;
+    }
+
+    .checkbox {
+      left: 1.5rem;
+    }
+  }
+
+  .list {
+    .list-item {
+      padding: 1.25rem 1.5rem;
+
+      p {
+        font-size: 1.125rem;
+        line-height: 1.125rem;
+        letter-spacing: -0.25px;
+        margin-left: 1.5rem;
+      }
+
+      img {
+        right: 1.5rem;
+        display: none;
+      }
+
+      &:hover img {
+        display: block;
+      }
+    }
+  }
+
   .footer {
     display: flex;
     justify-content: space-between;

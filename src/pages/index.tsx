@@ -1,8 +1,20 @@
+import AddTodo from '@/components/AddTodo';
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
+import TodoList from '@/components/TodoList';
+
 export default function Home() {
   return (
     <>
+      <div className='bg_image'></div>
       <main>
-        <h1>Todo App</h1>
+        <div className='app'>
+          <Header />
+          <AddTodo />
+          <TodoList />
+          <Footer />
+          <p>Drag and drop to reorder list</p>
+        </div>
       </main>
     </>
   );

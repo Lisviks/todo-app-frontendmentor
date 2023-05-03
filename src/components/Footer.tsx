@@ -3,7 +3,7 @@ export default function Footer() {
     <div className='footer'>
       <div className='items-left'>2 items left</div>
       <ul className='view-list'>
-        <li>All</li>
+        <li className='current'>All</li>
         <li>Active</li>
         <li>Completed</li>
       </ul>

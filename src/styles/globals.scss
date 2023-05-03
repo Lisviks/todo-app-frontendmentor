@@ -77,10 +77,16 @@ header {
   }
 
   &.checked {
-    background: url('../../public/images/icon-check.svg'), $gradient;
-    background-repeat: no-repeat;
-    background-position: center;
+    background: url('../../public/images/icon-check.svg'), $gradient !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
     border: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background: linear-gradient(white, white) padding-box, $gradient border-box;
+    border-color: transparent;
   }
 }
 
@@ -111,6 +117,12 @@ header {
     top: 50%;
     left: 1.25rem;
     transform: translateY(-50%);
+
+    &:hover {
+      cursor: default;
+      background: unset;
+      border-color: #979797;
+    }
   }
 }
 
@@ -122,12 +134,21 @@ header {
   position: relative;
   z-index: 1;
 
+  .checkbox.checked ~ p {
+    color: $light-grayish-blue;
+    text-decoration: line-through;
+  }
+
   .list-item {
     display: flex;
     align-items: center;
     padding: 1rem 1.25rem;
     border-bottom: 1px solid $very-light-grayish-blue;
     position: relative;
+
+    &:hover {
+      cursor: pointer;
+    }
 
     p {
       font-weight: 400;
@@ -167,6 +188,11 @@ header {
     border-bottom-right-radius: 5px;
     box-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5);
     z-index: 2;
+
+    &:hover {
+      cursor: pointer;
+      color: $very-dark-grayish-blue;
+    }
   }
 
   .clear-completed {
@@ -194,6 +220,15 @@ header {
 
       &:last-child {
         margin-right: 0;
+      }
+
+      &.current {
+        color: $bright-blue !important;
+      }
+
+      &:hover {
+        cursor: pointer;
+        color: $very-dark-grayish-blue;
       }
     }
   }

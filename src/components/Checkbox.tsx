@@ -1,11 +1,7 @@
-interface Props {
-  checked: boolean;
-}
+import { useState } from 'react';
 
-export default function Checkbox({ checked }: Props) {
-  return (
-    <div className={`checkbox ${checked && 'checked'}`}>
-      <input type='checkbox' checked={checked} />
-    </div>
-  );
+export default function Checkbox() {
+  const [complete, setComplete] = useState(false);
+
+  return <div className={`checkbox ${complete && 'checked'}`} onClick={() => setComplete(!complete)}></div>;
 }

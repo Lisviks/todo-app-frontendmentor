@@ -1,8 +1,23 @@
-import ThemeContext from '@/context/ThemeContext';
-import { useContext } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Header() {
-  const { toggleTheme } = useContext(ThemeContext);
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const bodyClassList = document.body.classList;
+    if (isDark) {
+      bodyClassList.remove('light');
+      bodyClassList.add('dark');
+    } else {
+      bodyClassList.remove('dark');
+      bodyClassList.add('light');
+    }
+  }, [isDark]);
+
+  const toggleTheme = () => {
+    console.log('test');
+    setIsDark(!isDark);
+  };
 
   return (
     <header>

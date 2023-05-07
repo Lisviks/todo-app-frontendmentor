@@ -2,6 +2,7 @@ import AddTodo from '@/components/AddTodo';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import TodoList from '@/components/TodoList';
+import { TodosProvider } from '@/context/TodosContext';
 
 export default function Home() {
   return (
@@ -10,9 +11,11 @@ export default function Home() {
       <main>
         <div className='app'>
           <Header />
-          <AddTodo />
-          <TodoList />
-          <Footer />
+          <TodosProvider>
+            <AddTodo />
+            <TodoList />
+            <Footer />
+          </TodosProvider>
           <p>Drag and drop to reorder list</p>
         </div>
       </main>

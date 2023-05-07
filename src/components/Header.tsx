@@ -4,6 +4,11 @@ export default function Header() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
+    const theme = localStorage.getItem('FEM-todo-theme');
+    theme && setIsDark(JSON.parse(theme));
+  }, []);
+
+  useEffect(() => {
     const bodyClassList = document.body.classList;
     if (isDark) {
       bodyClassList.remove('light');
@@ -15,8 +20,8 @@ export default function Header() {
   }, [isDark]);
 
   const toggleTheme = () => {
-    console.log('test');
     setIsDark(!isDark);
+    localStorage.setItem('FEM-todo-theme', `${!isDark}`);
   };
 
   return (

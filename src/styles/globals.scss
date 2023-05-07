@@ -16,9 +16,9 @@ body {
 }
 
 .bg_image {
-  background: url('../../public/images/bg-mobile-light.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
+  // background: url('../../public/images/bg-mobile-light.jpg');
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
   height: 200px;
   width: 100%;
   position: absolute;
@@ -40,12 +40,24 @@ body {
   }
 }
 
-body.light header .theme-switch {
-  background: url('../../public/images/icon-moon.svg');
+body.light {
+  .bg_image {
+    background: url('../../public/images/bg-mobile-light.jpg');
+  }
+
+  header .theme-switch {
+    background: url('../../public/images/icon-moon.svg');
+  }
 }
 
-body.dark header .theme-switch {
-  background: url('../../public/images/icon-sun.svg');
+body.dark {
+  .bg_image {
+    background: url('../../public/images/bg-mobile-dark.jpg');
+  }
+
+  header .theme-switch {
+    background: url('../../public/images/icon-sun.svg');
+  }
 }
 
 header {
@@ -256,10 +268,19 @@ header {
 }
 
 @media (min-width: 550px) {
+  body.light {
+    .bg_image {
+      background: url('../../public/images/bg-desktop-light.jpg');
+    }
+  }
+
+  body.dark {
+    .bg_image {
+      background: url('../../public/images/bg-desktop-dark.jpg');
+    }
+  }
+
   .bg_image {
-    background: url('../../public/images/bg-desktop-light.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
     height: 300px;
   }
 

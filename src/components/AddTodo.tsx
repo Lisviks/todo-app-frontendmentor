@@ -1,9 +1,16 @@
 import { useTodosDispatch } from '@/context/TodosContext';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 export default function AddTodo() {
   const [text, setText] = useState('');
   const dispatch = useTodosDispatch();
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      setText('');
+      dispatch({ type: 'ADD', id: Date.now(), text });
+    }
+  };
 
   return (
     <div className='input-field'>
@@ -14,11 +21,17 @@ export default function AddTodo() {
           dispatch({
             type: 'ADD',
             id: Date.now(),
-            text: text,
+            text,
           });
         }}
       ></div>
-      <input type='text' placeholder='Create a new todo...' value={text} onChange={(e) => setText(e.target.value)} />
+      <input
+        type='text'
+        placeholder='Create a new todo...'
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        onKeyDown={handleKeyDown}
+      />
     </div>
   );
 }

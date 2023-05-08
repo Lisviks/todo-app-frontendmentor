@@ -1,30 +1,5 @@
+import { AddAction, ChangeAction, DeleteAction, ProviderPropsInterface, Todo } from '@/interfaces';
 import React, { createContext, useContext, useReducer } from 'react';
-
-interface ThemePropsInterface {
-  children?: JSX.Element | Array<JSX.Element>;
-}
-
-interface Todo {
-  id: number;
-  text: string;
-  complete: boolean;
-}
-
-interface AddAction {
-  type: 'ADD';
-  id: number;
-  text: string;
-}
-
-interface ChangeAction {
-  type: 'CHANGE';
-  todo: Todo;
-}
-
-interface DeleteAction {
-  type: 'DELETE';
-  id: number;
-}
 
 type Action = AddAction | ChangeAction | DeleteAction;
 
@@ -33,7 +8,7 @@ export const TodosDispatchContext = createContext<React.Dispatch<any>>(() => {
   throw new Error('TodosDispatchContext value not initialized');
 });
 
-export const TodosProvider = ({ children }: ThemePropsInterface) => {
+export const TodosProvider = ({ children }: ProviderPropsInterface) => {
   const [todos, dispatch] = useReducer(todosReducer, initialTodos);
 
   return (

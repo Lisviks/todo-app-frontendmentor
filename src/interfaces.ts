@@ -1,0 +1,25 @@
+export interface ProviderPropsInterface {
+  children?: JSX.Element | Array<JSX.Element>;
+}
+
+export interface Todo {
+  id: number;
+  text: string;
+  complete: boolean;
+}
+
+export interface AddAction {
+  type: 'ADD';
+  id: number;
+  text: string;
+}
+
+export interface ChangeAction {
+  type: 'CHANGE';
+  todo: Todo;
+}
+
+export interface DeleteAction {
+  type: 'DELETE';
+  id: number;
+}

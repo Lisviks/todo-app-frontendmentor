@@ -2,14 +2,9 @@ import Image from 'next/image';
 import crossIcon from '@/../public/images/icon-cross.svg';
 import Checkbox from './Checkbox';
 import { useTodosDispatch } from '@/context/TodosContext';
+import { Todo } from '@/interfaces';
 
-interface Props {
-  id: number;
-  text: string;
-  complete: boolean;
-}
-
-export default function ListItem({ text, complete, id }: Props) {
+export default function ListItem({ text, complete, id }: Todo) {
   const dispatch = useTodosDispatch();
 
   return (

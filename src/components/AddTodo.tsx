@@ -6,25 +6,17 @@ export default function AddTodo() {
   const dispatch = useTodosDispatch();
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      setText('');
-      dispatch({ type: 'ADD', id: Date.now(), text });
-    }
+    if (e.key === 'Enter') addTodo();
+  };
+
+  const addTodo = () => {
+    setText('');
+    dispatch({ type: 'ADD', id: Date.now(), text });
   };
 
   return (
     <div className='input-field'>
-      <div
-        className={'checkbox'}
-        onClick={() => {
-          setText('');
-          dispatch({
-            type: 'ADD',
-            id: Date.now(),
-            text,
-          });
-        }}
-      ></div>
+      <div className={'checkbox'} onClick={addTodo}></div>
       <input
         type='text'
         placeholder='Create a new todo...'

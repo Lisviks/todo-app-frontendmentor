@@ -18,10 +18,7 @@ export const TodosProvider = ({ children }: ProviderPropsInterface) => {
   );
 };
 
-export const useTodos = () => {
-  const todos = useContext(TodosContext);
-  return todos ?? [];
-};
+export const useTodos = () => useContext(TodosContext);
 export const useTodosDispatch = () => useContext(TodosDispatchContext);
 
 const todosReducer = (todos: Todo[], action: Action) => {

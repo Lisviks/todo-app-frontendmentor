@@ -1,11 +1,5 @@
-import { useEffect, useState } from 'react';
+import { CheckboxInterface } from '@/interfaces';
 
-export default function Checkbox({ checked }: { checked: boolean }) {
-  const [complete, setComplete] = useState(false);
-
-  useEffect(() => {
-    checked ? setComplete(true) : setComplete(false);
-  }, [checked]);
-
-  return <div className={`checkbox ${complete && 'checked'}`} onClick={() => setComplete(!complete)}></div>;
+export default function Checkbox({ complete, handleComplete }: CheckboxInterface) {
+  return <div className={`checkbox ${complete && 'checked'}`} onClick={() => handleComplete()}></div>;
 }

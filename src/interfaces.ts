@@ -23,3 +23,8 @@ export interface DeleteAction {
   type: 'DELETE';
   id: number;
 }
+
+export interface CheckboxInterface {
+  complete: boolean;
+  handleComplete: Function;
+}

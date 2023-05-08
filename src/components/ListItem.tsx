@@ -7,9 +7,13 @@ import { Todo } from '@/interfaces';
 export default function ListItem({ text, complete, id }: Todo) {
   const dispatch = useTodosDispatch();
 
+  const handleComplete = () => {
+    dispatch({ type: 'CHANGE', todo: { text, complete: !complete, id } });
+  };
+
   return (
     <li className='list-item'>
-      <Checkbox checked={complete} />
+      <Checkbox complete={complete} handleComplete={handleComplete} />
       <p>{text}</p>
       <Image
         src={crossIcon}

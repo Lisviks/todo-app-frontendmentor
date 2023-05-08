@@ -10,8 +10,10 @@ export default function AddTodo() {
   };
 
   const addTodo = () => {
-    setText('');
-    dispatch({ type: 'ADD', id: Date.now(), text });
+    if (text.length > 0) {
+      setText('');
+      dispatch({ type: 'ADD', id: Date.now(), text });
+    }
   };
 
   return (

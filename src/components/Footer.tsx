@@ -19,7 +19,7 @@ export default function Footer() {
         <li className={filter === 'active' ? 'current' : ''} onClick={() => changeFilter('active')}>
           Active
         </li>
-        <li className={filter === 'current' ? 'current' : ''} onClick={() => changeFilter('current')}>
+        <li className={filter === 'complete' ? 'current' : ''} onClick={() => changeFilter('complete')}>
           Completed
         </li>
       </ul>

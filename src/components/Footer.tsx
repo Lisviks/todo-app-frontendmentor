@@ -23,7 +23,9 @@ export default function Footer() {
           Completed
         </li>
       </ul>
-      <div className='clear-completed'>Clear Completed</div>
+      <div className='clear-completed' onClick={() => dispatch({ type: 'DELETE_COMPLETE' })}>
+        Clear Completed
+      </div>
     </div>
   );
 }

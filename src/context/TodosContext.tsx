@@ -1,7 +1,16 @@
-import { AddAction, ChangeAction, DeleteAction, FilterAction, ProviderPropsInterface, State, Todo } from '@/interfaces';
+import {
+  AddAction,
+  ChangeAction,
+  DeleteAction,
+  DeleteCompleteAction,
+  FilterAction,
+  ProviderPropsInterface,
+  State,
+  Todo,
+} from '@/interfaces';
 import React, { createContext, useContext, useReducer } from 'react';
 
-type Action = AddAction | ChangeAction | DeleteAction | FilterAction;
+type Action = AddAction | ChangeAction | DeleteAction | DeleteCompleteAction | FilterAction;
 
 const initialTodos: Todo[] = [
   {
@@ -63,6 +72,9 @@ const todosReducer = (state: State, action: Action) => {
     }
     case 'DELETE': {
       return { ...state, todos: state.todos.filter((todo) => todo.id !== action.id) };
+    }
+    case 'DELETE_COMPLETE': {
+      return { ...state, todos: state.todos.filter((todo) => !todo.complete) };
     }
     default: {
       throw Error('Unknown action: ' + JSON.stringify(action));

@@ -29,6 +29,10 @@ export interface DeleteAction {
   id: number;
 }
 
+export interface DeleteCompleteAction {
+  type: 'DELETE_COMPLETE';
+}
+
 export interface FilterAction {
   type: 'FILTER_TODO';
   filter: string;

@@ -4,32 +4,16 @@ import {
   DeleteAction,
   DeleteCompleteAction,
   FilterAction,
+  InitTodosAction,
   ProviderPropsInterface,
   State,
   Todo,
 } from '@/interfaces';
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useEffect, useReducer } from 'react';
 
-type Action = AddAction | ChangeAction | DeleteAction | DeleteCompleteAction | FilterAction;
+type Action = InitTodosAction | AddAction | ChangeAction | DeleteAction | DeleteCompleteAction | FilterAction;
 
-const initialTodos: Todo[] = [
-  {
-    id: 1,
-    text: 'Workout',
-    complete: true,
-  },
-  {
-    id: 2,
-    text: 'Coding',
-    complete: false,
-  },
-  {
-    id: 3,
-    text: 'Complete todo app',
-    complete: false,
-  },
-];
-
+const initialTodos: Todo[] = [];
 const initialState: State = { todos: initialTodos, filter: 'all' };
 
 export const TodosContext = createContext<State>(initialState);
@@ -39,6 +23,20 @@ export const TodosDispatchContext = createContext<React.Dispatch<any>>(() => {
 
 export const TodosProvider = ({ children }: ProviderPropsInterface) => {
   const [state, dispatch] = useReducer(todosReducer, initialState);
+
+  useEffect(() => {
+    const localStorageTodos = JSON.parse(localStorage.getItem('FEM-todos') || '[]');
+
+    if (localStorageTodos) {
+      dispatch({ type: 'INIT_TODOS', todos: localStorageTodos });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (state !== initialState) {
+      localStorage.setItem('FEM-todos', JSON.stringify(state.todos));
+    }
+  }, [state]);
 
   return (
     <TodosContext.Provider value={state}>
@@ -52,6 +50,9 @@ export const useTodosDispatch = () => useContext(TodosDispatchContext);
 
 const todosReducer = (state: State, action: Action) => {
   switch (action.type) {
+    case 'INIT_TODOS': {
+      return { ...state, todos: action.todos };
+    }
     case 'ADD': {
       return { ...state, todos: [...state.todos, { id: action.id, text: action.text, complete: false }] };
     }

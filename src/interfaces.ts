@@ -13,6 +13,11 @@ export interface State {
   filter: string;
 }
 
+export interface InitTodosAction {
+  type: 'INIT_TODOS';
+  todos: Todo[];
+}
+
 export interface AddAction {
   type: 'ADD';
   id: number;

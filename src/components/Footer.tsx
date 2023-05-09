@@ -1,7 +1,7 @@
 import { useTodos } from '@/context/TodosContext';
 
 export default function Footer() {
-  const todos = useTodos();
+  const { todos } = useTodos();
   const todosLeft = todos.filter((todo) => !todo.complete).length;
 
   return (

@@ -8,6 +8,11 @@ export interface Todo {
   complete: boolean;
 }
 
+export interface State {
+  todos: Todo[];
+  filter: string;
+}
+
 export interface AddAction {
   type: 'ADD';
   id: number;
@@ -22,6 +27,11 @@ export interface ChangeAction {
 export interface DeleteAction {
   type: 'DELETE';
   id: number;
+}
+
+export interface FilterAction {
+  type: 'FILTER_TODO';
+  filter: string;
 }
 
 export interface CheckboxInterface {

@@ -2,7 +2,7 @@ import { useTodos } from '@/context/TodosContext';
 import ListItem from './ListItem';
 
 export default function TodoList() {
-  const todos = useTodos();
+  const { todos } = useTodos();
 
   return (
     <section>

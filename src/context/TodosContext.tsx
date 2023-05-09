@@ -1,7 +1,7 @@
-import { AddAction, ChangeAction, DeleteAction, ProviderPropsInterface, State, Todo } from '@/interfaces';
+import { AddAction, ChangeAction, DeleteAction, FilterAction, ProviderPropsInterface, State, Todo } from '@/interfaces';
 import React, { createContext, useContext, useReducer } from 'react';
 
-type Action = AddAction | ChangeAction | DeleteAction;
+type Action = AddAction | ChangeAction | DeleteAction | FilterAction;
 
 const initialTodos: Todo[] = [
   {
@@ -57,6 +57,9 @@ const todosReducer = (state: State, action: Action) => {
           }
         }),
       };
+    }
+    case 'FILTER_TODO': {
+      return { ...state, filter: action.filter };
     }
     case 'DELETE': {
       return { ...state, todos: state.todos.filter((todo) => todo.id !== action.id) };

@@ -6,8 +6,6 @@ import { TodosProvider } from '@/context/TodosContext';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 export default function Home() {
-  const handleOnDragEnd = () => {};
-
   return (
     <>
       <div className='bg_image'></div>
@@ -16,9 +14,7 @@ export default function Home() {
           <Header />
           <TodosProvider>
             <AddTodo />
-            <DragDropContext onDragEnd={handleOnDragEnd}>
-              <Droppable droppableId='droppable-1'>{(provided) => <TodoList provided={provided} />}</Droppable>
-            </DragDropContext>
+            <TodoList />
             <Footer />
           </TodosProvider>
           <p>Drag and drop to reorder list</p>

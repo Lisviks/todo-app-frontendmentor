@@ -11,11 +11,13 @@ export interface Todo {
 export interface State {
   todos: Todo[];
   filter: string;
+  todoIds: number[];
 }
 
 export interface InitTodosAction {
   type: 'INIT_TODOS';
   todos: Todo[];
+  todoIds: number[];
 }
 
 export interface AddAction {
@@ -41,6 +43,12 @@ export interface DeleteCompleteAction {
 export interface FilterAction {
   type: 'FILTER_TODO';
   filter: string;
+}
+
+export interface ChangeOrderAction {
+  type: 'CHANGE_ORDER';
+  newTodos: Todo[];
+  newTodoIds: [];
 }
 
 export interface CheckboxInterface {

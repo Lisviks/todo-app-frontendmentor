@@ -1,6 +1,7 @@
 import {
   AddAction,
   ChangeAction,
+  ChangeOrderAction,
   DeleteAction,
   DeleteCompleteAction,
   FilterAction,
@@ -11,10 +12,17 @@ import {
 } from '@/interfaces';
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
 
-type Action = InitTodosAction | AddAction | ChangeAction | DeleteAction | DeleteCompleteAction | FilterAction;
+type Action =
+  | InitTodosAction
+  | AddAction
+  | ChangeAction
+  | DeleteAction
+  | DeleteCompleteAction
+  | FilterAction
+  | ChangeOrderAction;
 
 const initialTodos: Todo[] = [];
-const initialState: State = { todos: initialTodos, filter: 'all' };
+const initialState: State = { todos: initialTodos, filter: 'all', todoIds: [] };
 
 export const TodosContext = createContext<State>(initialState);
 export const TodosDispatchContext = createContext<React.Dispatch<any>>(() => {
@@ -26,9 +34,14 @@ export const TodosProvider = ({ children }: ProviderPropsInterface) => {
 
   useEffect(() => {
     const localStorageTodos = JSON.parse(localStorage.getItem('FEM-todos') || '[]');
+    const ids = localStorageTodos.map((todo: Todo) => todo.id);
 
     if (localStorageTodos) {
-      dispatch({ type: 'INIT_TODOS', todos: localStorageTodos });
+      dispatch({
+        type: 'INIT_TODOS',
+        todos: localStorageTodos,
+        todoIds: ids,
+      });
     }
   }, []);
 
@@ -51,7 +64,8 @@ export const useTodosDispatch = () => useContext(TodosDispatchContext);
 const todosReducer = (state: State, action: Action) => {
   switch (action.type) {
     case 'INIT_TODOS': {
-      return { ...state, todos: action.todos };
+      console.log(action);
+      return { ...state, todos: action.todos, todoIds: action.todoIds };
     }
     case 'ADD': {
       return { ...state, todos: [...state.todos, { id: action.id, text: action.text, complete: false }] };
@@ -76,6 +90,9 @@ const todosReducer = (state: State, action: Action) => {
     }
     case 'DELETE_COMPLETE': {
       return { ...state, todos: state.todos.filter((todo) => !todo.complete) };
+    }
+    case 'CHANGE_ORDER': {
+      return { ...state, todos: action.newTodos, todoIds: action.newTodoIds };
     }
     default: {
       throw Error('Unknown action: ' + JSON.stringify(action));

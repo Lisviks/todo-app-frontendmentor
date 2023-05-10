@@ -359,6 +359,7 @@ header {
     position: relative;
     z-index: 1;
     box-shadow: var(--box-shadow);
+    background-color: var(--app-background);
 
     .items-left,
     .clear-completed {

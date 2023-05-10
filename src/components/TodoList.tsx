@@ -1,7 +1,7 @@
 import { useTodos } from '@/context/TodosContext';
 import ListItem from './ListItem';
 
-export default function TodoList() {
+export default function TodoList({ provided }: any) {
   const { todos, filter } = useTodos();
 
   const filteredTodos = todos.filter((todo) => {
@@ -11,11 +11,12 @@ export default function TodoList() {
   });
 
   return (
-    <section>
-      <ul className='list'>
-        {filteredTodos.map((todo) => (
-          <ListItem key={todo.id} text={todo.text} complete={todo.complete} id={todo.id} />
+    <section ref={provided.innerRef}>
+      <ul className='list' {...provided.draggableProps}>
+        {filteredTodos.map((todo, index) => (
+          <ListItem key={todo.id} text={todo.text} complete={todo.complete} id={todo.id} index={index} />
         ))}
+        {provided.placeholder}
       </ul>
     </section>
   );

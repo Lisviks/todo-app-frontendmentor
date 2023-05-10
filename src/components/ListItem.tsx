@@ -3,8 +3,9 @@ import crossIcon from '@/../public/images/icon-cross.svg';
 import Checkbox from './Checkbox';
 import { useTodosDispatch } from '@/context/TodosContext';
 import { Todo } from '@/interfaces';
+import { Draggable } from 'react-beautiful-dnd';
 
-export default function ListItem({ text, complete, id }: Todo) {
+export default function ListItem({ text, complete, id, index }: Todo & { index: number }) {
   const dispatch = useTodosDispatch();
 
   const handleComplete = () => {
@@ -12,19 +13,23 @@ export default function ListItem({ text, complete, id }: Todo) {
   };
 
   return (
-    <li className='list-item'>
-      <Checkbox complete={complete} handleComplete={handleComplete} />
-      <p>{text}</p>
-      <Image
-        src={crossIcon}
-        alt='delete todo'
-        onClick={() =>
-          dispatch({
-            type: 'DELETE',
-            id,
-          })
-        }
-      />
-    </li>
+    <Draggable draggableId={`${id}`} index={index}>
+      {(provided) => (
+        <li className='list-item' {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+          <Checkbox complete={complete} handleComplete={handleComplete} />
+          <p>{text}</p>
+          <Image
+            src={crossIcon}
+            alt='delete todo'
+            onClick={() =>
+              dispatch({
+                type: 'DELETE',
+                id,
+              })
+            }
+          />
+        </li>
+      )}
+    </Draggable>
   );
 }

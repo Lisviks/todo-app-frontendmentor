@@ -77,7 +77,7 @@ header {
   .theme-switch {
     height: 20px;
     width: 20px;
-    background-size: contain;
+    background-size: contain !important;
 
     &:hover {
       cursor: pointer;
@@ -198,7 +198,6 @@ header {
   grid-template-rows: 3rem;
   gap: 1.25rem 0;
   color: var(--footer-font-color);
-  background-color: var(--app-background);
   transition: all 0.3s ease;
 
   .items-left,

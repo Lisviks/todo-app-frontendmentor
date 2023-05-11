@@ -64,7 +64,6 @@ export const useTodosDispatch = () => useContext(TodosDispatchContext);
 const todosReducer = (state: State, action: Action) => {
   switch (action.type) {
     case 'INIT_TODOS': {
-      console.log(action);
       return { ...state, todos: action.todos, todoIds: action.todoIds };
     }
     case 'ADD': {

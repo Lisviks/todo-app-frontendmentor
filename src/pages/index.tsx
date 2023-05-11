@@ -3,7 +3,8 @@ import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import TodoList from '@/components/TodoList';
 import { TodosProvider } from '@/context/TodosContext';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { GetServerSideProps } from 'next';
+import { DragDropContext, Droppable, resetServerContext } from 'react-beautiful-dnd';
 
 export default function Home() {
   return (
@@ -23,3 +24,8 @@ export default function Home() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  resetServerContext();
+  return { props: { data: [] } };
+};

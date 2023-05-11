@@ -4,7 +4,7 @@ import Header from '@/components/Header';
 import TodoList from '@/components/TodoList';
 import { TodosProvider } from '@/context/TodosContext';
 import { GetServerSideProps } from 'next';
-import { DragDropContext, Droppable, resetServerContext } from 'react-beautiful-dnd';
+import { resetServerContext } from 'react-beautiful-dnd';
 
 export default function Home() {
   return (

@@ -1,6 +1,6 @@
 import { useTodos, useTodosDispatch } from '@/context/TodosContext';
 import ListItem from './ListItem';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
 
 export default function TodoList() {
   const { todos, filter, todoIds } = useTodos();
@@ -12,7 +12,7 @@ export default function TodoList() {
     return todo;
   });
 
-  const handleOnDragEnd = (result: any) => {
+  const handleOnDragEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
 
     if (!destination) {

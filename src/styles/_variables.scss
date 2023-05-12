@@ -4,6 +4,7 @@ $bright-blue: hsl(220, 98%, 61%);
 body.light {
   --background: #fafafa;
   --app-background: #ffffff;
+  --dragging-color: hsl(0, 0%, 95%);
   --main-font: #494c6b;
   --border: #e3e4f1;
   --complete-todo-item: #d1d2da;
@@ -14,6 +15,7 @@ body.light {
 body.dark {
   --background: #161722;
   --app-background: #25273d;
+  --dragging-color: hsl(235, 24%, 25%);
   --main-font: #c8cbe7;
   --border: #393a4b;
   --complete-todo-item: #4d5067;

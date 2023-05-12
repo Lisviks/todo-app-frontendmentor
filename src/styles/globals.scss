@@ -152,6 +152,7 @@ header {
   list-style: none;
   background-color: var(--app-background);
   border-radius: 5px 5px 0 0;
+  overflow: hidden;
   box-shadow: var(--box-shadow);
   position: relative;
   z-index: 1;
@@ -168,10 +169,16 @@ header {
     padding: 1rem 1.25rem;
     border-bottom: 1px solid var(--border);
     position: relative;
-    // transition: border-color 0.3s ease;
+    background-color: var(--app-background);
 
     &:hover {
       cursor: pointer;
+    }
+
+    &.dragging {
+      border: none;
+      background-color: var(--dragging-color);
+      border-radius: 5px;
     }
 
     p {

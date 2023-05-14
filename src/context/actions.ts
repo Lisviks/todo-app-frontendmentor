@@ -16,3 +16,13 @@ export const deleteTodo = async (id: string, dispatch: React.Dispatch<any>) => {
   });
   dispatch({ type: 'DELETE', id: id });
 };
+
+export const completeTodo = async (id: string, complete: boolean, dispatch: React.Dispatch<any>) => {
+  const res = await fetch(`/api/todos?id=${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ complete }),
+  });
+  const data = await res.json();
+  dispatch({ type: 'CHANGE', todo: data.todo });
+};

@@ -24,6 +24,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       await TodoModel.deleteOne({ _id: req.query.id });
       res.status(204).end();
       break;
+    case 'PUT':
+      const updatedTodo = await TodoModel.findOneAndUpdate(
+        { _id: req.query.id },
+        { complete: req.body.complete },
+        { new: true }
+      );
+      res.status(200).json({ todo: updatedTodo });
+      break;
     default:
       res.setHeader('Allow', ['GET', 'POST', 'DELETE']);
       res.status(405).end(`Method ${method} Not Allowed`);

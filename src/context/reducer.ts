@@ -12,18 +12,18 @@ export const todosReducer = (state: State, action: Action) => {
     case 'ADD': {
       return { ...state, todos: [...state.todos, action.todo] };
     }
-    // case 'CHANGE': {
-    //   return {
-    //     ...state,
-    //     todos: state.todos.map((todo) => {
-    //       if (todo.id === action.todo.id) {
-    //         return action.todo;
-    //       } else {
-    //         return todo;
-    //       }
-    //     }),
-    //   };
-    // }
+    case 'CHANGE': {
+      return {
+        ...state,
+        todos: state.todos.map((todo) => {
+          if (todo.id === action.todo.id) {
+            return action.todo;
+          } else {
+            return todo;
+          }
+        }),
+      };
+    }
     // case 'FILTER_TODO': {
     //   return { ...state, filter: action.filter };
     // }

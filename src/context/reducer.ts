@@ -24,9 +24,9 @@ export const todosReducer = (state: State, action: Action) => {
         }),
       };
     }
-    // case 'FILTER_TODO': {
-    //   return { ...state, filter: action.filter };
-    // }
+    case 'FILTER_TODO': {
+      return { ...state, filter: action.filter };
+    }
     case 'DELETE': {
       return { ...state, todos: state.todos.filter((todo) => todo.id !== action.id) };
     }

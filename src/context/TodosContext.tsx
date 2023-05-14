@@ -1,6 +1,7 @@
 import { ProviderPropsInterface, State, Todo } from '@/interfaces';
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import { todosReducer } from './reducer';
+import { fetchTodos } from './actions';
 
 const initialTodos: Todo[] = [];
 const initialState: State = { todos: initialTodos, filter: 'all', todoIds: [] };
@@ -14,11 +15,7 @@ export const TodosProvider = ({ children }: ProviderPropsInterface) => {
   const [state, dispatch] = useReducer(todosReducer, initialState);
 
   useEffect(() => {
-    fetch('/api/todos')
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch({ type: 'FETCH_TODOS', todos: data.todos });
-      });
+    fetchTodos(dispatch);
   }, []);
 
   return (

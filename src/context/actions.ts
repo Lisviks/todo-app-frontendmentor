@@ -1,5 +1,11 @@
 import React from 'react';
 
+export const fetchTodos = async (dispatch: React.Dispatch<any>) => {
+  const res = await fetch('/api/todos');
+  const data = await res.json();
+  dispatch({ type: 'FETCH_TODOS', todos: data.todos });
+};
+
 export const addTodo = async (text: string, dispatch: React.Dispatch<any>) => {
   const res = await fetch('/api/todos', {
     method: 'POST',

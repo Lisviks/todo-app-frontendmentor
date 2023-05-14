@@ -37,7 +37,7 @@ export interface ChangeAction {
 
 export interface DeleteAction {
   type: 'DELETE';
-  id: number;
+  id: string;
 }
 
 export interface DeleteCompleteAction {

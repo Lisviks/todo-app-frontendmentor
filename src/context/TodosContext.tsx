@@ -5,9 +5,10 @@ import React, { createContext, useContext, useEffect, useReducer } from 'react';
 const initialTodos: Todo[] = [];
 const initialState: State = { todos: initialTodos, filter: 'all', todoIds: [] };
 
-export const TodosContext = createContext<{ state: State; addTodo: Function }>({
+export const TodosContext = createContext<{ state: State; addTodo: Function; deleteTodo: Function }>({
   state: initialState,
   addTodo: () => {},
+  deleteTodo: () => {},
 });
 export const TodosDispatchContext = createContext<React.Dispatch<any>>(() => {
   throw new Error('TodosDispatchContext value not initialized');
@@ -31,11 +32,19 @@ export const TodosProvider = ({ children }: ProviderPropsInterface) => {
       body: JSON.stringify({ text }),
     });
     const data = await res.json();
+    console.log(data);
     dispatch({ type: 'ADD', todo: data.todo });
   };
 
+  const deleteTodo = async (id: string) => {
+    await fetch(`/api/todos?id=${id}`, {
+      method: 'DELETE',
+    });
+    dispatch({ type: 'DELETE', id: id });
+  };
+
   return (
-    <TodosContext.Provider value={{ state, addTodo }}>
+    <TodosContext.Provider value={{ state, addTodo, deleteTodo }}>
       <TodosDispatchContext.Provider value={dispatch}>{children}</TodosDispatchContext.Provider>
     </TodosContext.Provider>
   );
@@ -70,9 +79,9 @@ const todosReducer = (state: State, action: Action) => {
     // case 'FILTER_TODO': {
     //   return { ...state, filter: action.filter };
     // }
-    // case 'DELETE': {
-    //   return { ...state, todos: state.todos.filter((todo) => todo.id !== action.id) };
-    // }
+    case 'DELETE': {
+      return { ...state, todos: state.todos.filter((todo) => todo.id !== action.id) };
+    }
     // case 'DELETE_COMPLETE': {
     //   return { ...state, todos: state.todos.filter((todo) => !todo.complete) };
     // }

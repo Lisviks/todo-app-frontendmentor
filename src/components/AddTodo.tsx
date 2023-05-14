@@ -1,9 +1,10 @@
-import { useTodos } from '@/context/TodosContext';
+import { useTodosDispatch } from '@/context/TodosContext';
+import { addTodo } from '@/context/actions';
 import React, { useState } from 'react';
 
 export default function AddTodo() {
   const [text, setText] = useState('');
-  const { addTodo } = useTodos();
+  const dispatch = useTodosDispatch();
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') handleAddTodo();
@@ -11,7 +12,7 @@ export default function AddTodo() {
 
   const handleAddTodo = () => {
     if (text.length > 0) {
-      addTodo(text);
+      addTodo(text, dispatch);
       setText('');
     }
   };

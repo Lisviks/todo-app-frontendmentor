@@ -5,7 +5,10 @@ import React, { createContext, useContext, useEffect, useReducer } from 'react';
 const initialTodos: Todo[] = [];
 const initialState: State = { todos: initialTodos, filter: 'all', todoIds: [] };
 
-export const TodosContext = createContext<State>(initialState);
+export const TodosContext = createContext<{ state: State; addTodo: Function }>({
+  state: initialState,
+  addTodo: () => {},
+});
 export const TodosDispatchContext = createContext<React.Dispatch<any>>(() => {
   throw new Error('TodosDispatchContext value not initialized');
 });
@@ -17,13 +20,22 @@ export const TodosProvider = ({ children }: ProviderPropsInterface) => {
     fetch('/api/todos')
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         dispatch({ type: 'FETCH_TODOS', todos: data.todos });
       });
   }, []);
 
+  const addTodo = async (text: string) => {
+    const res = await fetch('/api/todos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text }),
+    });
+    const data = await res.json();
+    dispatch({ type: 'ADD', todo: data.todo });
+  };
+
   return (
-    <TodosContext.Provider value={state}>
+    <TodosContext.Provider value={{ state, addTodo }}>
       <TodosDispatchContext.Provider value={dispatch}>{children}</TodosDispatchContext.Provider>
     </TodosContext.Provider>
   );
@@ -40,9 +52,9 @@ const todosReducer = (state: State, action: Action) => {
     // case 'INIT_TODOS': {
     //   return { ...state, todos: action.todos, todoIds: action.todoIds };
     // }
-    // case 'ADD': {
-    //   return { ...state, todos: [...state.todos, { id: action.id, text: action.text, complete: false }] };
-    // }
+    case 'ADD': {
+      return { ...state, todos: [...state.todos, action.todo] };
+    }
     // case 'CHANGE': {
     //   return {
     //     ...state,

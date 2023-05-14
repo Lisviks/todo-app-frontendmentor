@@ -1,7 +1,9 @@
 import { useTodos, useTodosDispatch } from '@/context/TodosContext';
 
 export default function Footer() {
-  const { todos, filter } = useTodos();
+  const {
+    state: { todos, filter },
+  } = useTodos();
   const dispatch = useTodosDispatch();
   const todosLeft = todos.filter((todo) => !todo.complete).length;
 

@@ -3,7 +3,9 @@ import ListItem from './ListItem';
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
 
 export default function TodoList() {
-  const { todos, filter, todoIds } = useTodos();
+  const {
+    state: { todos, filter, todoIds },
+  } = useTodos();
   const dispatch = useTodosDispatch();
 
   const filteredTodos = todos.filter((todo) => {

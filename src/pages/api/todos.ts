@@ -3,13 +3,27 @@ import TodoModel from '@/models/Todo';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  try {
-    dbConnect();
-    const todos = await TodoModel.find();
-    res.status(200).json({ todos });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
+  const { method } = req;
+
+  switch (method) {
+    case 'GET':
+      try {
+        dbConnect();
+        const todos = await TodoModel.find();
+        res.status(200).json({ todos });
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+      }
+      break;
+    case 'POST':
+      const todo = await TodoModel.create({ text: req.body.text, complete: false });
+      res.status(201).json({ todo });
+      break;
+    default:
+      res.setHeader('Allow', ['GET', 'POST']);
+      res.status(405).end(`Method ${method} Not Allowed`);
+      break;
   }
 };
 

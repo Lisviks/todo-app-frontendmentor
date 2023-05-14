@@ -27,8 +27,7 @@ export interface InitTodosAction {
 
 export interface AddAction {
   type: 'ADD';
-  id: number;
-  text: string;
+  todo: Todo;
 }
 
 export interface ChangeAction {

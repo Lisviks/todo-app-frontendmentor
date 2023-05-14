@@ -13,27 +13,21 @@ export default function TodoList() {
   });
 
   const handleOnDragEnd = (result: DropResult) => {
-    const { destination, source, draggableId } = result;
-
-    if (!destination) {
-      return;
-    }
-
-    if (destination.droppableId === source.droppableId && destination.index === source.index) {
-      return;
-    }
-
-    const newTodoIds = Array.from(todoIds);
-
-    newTodoIds.splice(source.index, 1);
-    newTodoIds.splice(destination.index, 0, +draggableId);
-
-    const newTodos = Array.from(todos);
-    newTodos.sort((a, b) => {
-      return newTodoIds.indexOf(a.id) - newTodoIds.indexOf(b.id);
-    });
-
-    dispatch({ type: 'CHANGE_ORDER', newTodos, newTodoIds });
+    // const { destination, source, draggableId } = result;
+    // if (!destination) {
+    //   return;
+    // }
+    // if (destination.droppableId === source.droppableId && destination.index === source.index) {
+    //   return;
+    // }
+    // const newTodoIds = Array.from(todoIds);
+    // newTodoIds.splice(source.index, 1);
+    // newTodoIds.splice(destination.index, 0, +draggableId);
+    // const newTodos = Array.from(todos);
+    // newTodos.sort((a, b) => {
+    //   return newTodoIds.indexOf(a.id) - newTodoIds.indexOf(b.id);
+    // });
+    // dispatch({ type: 'CHANGE_ORDER', newTodos, newTodoIds });
   };
 
   return (

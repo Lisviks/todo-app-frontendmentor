@@ -5,6 +5,13 @@ const TodoSchema = new mongoose.Schema({
   complete: Boolean,
 });
 
+// Add .id to an objerct
+TodoSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString();
+  },
+});
+
 const TodoModel = mongoose.models.Todo || mongoose.model('Todo', TodoSchema);
 
 export default TodoModel;

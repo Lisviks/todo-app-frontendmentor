@@ -3,7 +3,7 @@ export interface ProviderPropsInterface {
 }
 
 export interface Todo {
-  id: number;
+  id: string;
   text: string;
   complete: boolean;
 }
@@ -12,6 +12,11 @@ export interface State {
   todos: Todo[];
   filter: string;
   todoIds: number[];
+}
+
+export interface FetchTodosAction {
+  type: 'FETCH_TODOS';
+  todos: Todo[];
 }
 
 export interface InitTodosAction {

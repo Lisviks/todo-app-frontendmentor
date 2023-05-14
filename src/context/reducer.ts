@@ -30,9 +30,9 @@ export const todosReducer = (state: State, action: Action) => {
     case 'DELETE': {
       return { ...state, todos: state.todos.filter((todo) => todo.id !== action.id) };
     }
-    // case 'DELETE_COMPLETE': {
-    //   return { ...state, todos: state.todos.filter((todo) => !todo.complete) };
-    // }
+    case 'DELETE_COMPLETE': {
+      return { ...state, todos: state.todos.filter((todo) => !todo.complete) };
+    }
     // case 'CHANGE_ORDER': {
     //   return { ...state, todos: action.newTodos, todoIds: action.newTodoIds };
     // }

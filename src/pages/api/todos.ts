@@ -21,8 +21,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(201).json({ todo });
       break;
     case 'DELETE':
-      await TodoModel.deleteOne({ _id: req.query.id });
-      res.status(204).end();
+      if (req.query.id) {
+        await TodoModel.deleteOne({ _id: req.query.id });
+        res.status(204).end();
+      }
+      if (req.query.complete) {
+        const deleteCount = await TodoModel.deleteMany({ complete: true });
+        console.log(deleteCount);
+        res.status(200).json({ deleteCount });
+      }
       break;
     case 'PUT':
       const updatedTodo = await TodoModel.findOneAndUpdate(

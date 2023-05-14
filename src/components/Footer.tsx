@@ -1,4 +1,5 @@
 import { useTodos, useTodosDispatch } from '@/context/TodosContext';
+import { deleteCompleteTodos } from '@/context/actions';
 
 export default function Footer() {
   const { todos, filter } = useTodos();
@@ -23,7 +24,7 @@ export default function Footer() {
           Completed
         </li>
       </ul>
-      <div className='clear-completed' onClick={() => dispatch({ type: 'DELETE_COMPLETE' })}>
+      <div className='clear-completed' onClick={() => deleteCompleteTodos(dispatch)}>
         Clear Completed
       </div>
     </div>

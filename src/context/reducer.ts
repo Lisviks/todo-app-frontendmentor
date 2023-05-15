@@ -3,12 +3,12 @@ import { Action } from '@/types';
 
 export const todosReducer = (state: State, action: Action) => {
   switch (action.type) {
+    case 'INIT': {
+      return { ...state, todos: action.todos, todoIds: action.todoIds };
+    }
     case 'FETCH_TODOS': {
       return { ...state, todos: action.todos };
     }
-    // case 'INIT_TODOS': {
-    //   return { ...state, todos: action.todos, todoIds: action.todoIds };
-    // }
     case 'ADD': {
       return { ...state, todos: [...state.todos, action.todo] };
     }
@@ -33,9 +33,12 @@ export const todosReducer = (state: State, action: Action) => {
     case 'DELETE_COMPLETE': {
       return { ...state, todos: state.todos.filter((todo) => !todo.complete) };
     }
-    // case 'CHANGE_ORDER': {
-    //   return { ...state, todos: action.newTodos, todoIds: action.newTodoIds };
-    // }
+    case 'FETCH_TODO_IDS': {
+      return { ...state, todoIds: { _id: action.todoIds._id, ids: action.todoIds.ids } };
+    }
+    case 'CHANGE_ORDER': {
+      return { ...state, todos: action.newTodos, todoIds: { ...state.todoIds, ids: action.newTodoIds } };
+    }
     default: {
       throw Error('Unknown action: ' + JSON.stringify(action));
     }

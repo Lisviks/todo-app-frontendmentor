@@ -1,9 +1,15 @@
 import { useTodos, useTodosDispatch } from '@/context/TodosContext';
 import ListItem from './ListItem';
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
+import { changeTodosOrder } from '@/context/actions';
+import { useEffect } from 'react';
 
 export default function TodoList() {
-  const { todos, filter, todoIds } = useTodos();
+  const {
+    todos,
+    filter,
+    todoIds: { ids: todoIds },
+  } = useTodos();
   const dispatch = useTodosDispatch();
 
   const filteredTodos = todos.filter((todo) => {
@@ -11,18 +17,19 @@ export default function TodoList() {
     if (filter === 'complete') return todo.complete;
     return todo;
   });
-
   const handleOnDragEnd = (result: DropResult) => {
-    // const { destination, source, draggableId } = result;
-    // if (!destination) {
-    //   return;
-    // }
-    // if (destination.droppableId === source.droppableId && destination.index === source.index) {
-    //   return;
-    // }
-    // const newTodoIds = Array.from(todoIds);
-    // newTodoIds.splice(source.index, 1);
-    // newTodoIds.splice(destination.index, 0, +draggableId);
+    const { destination, source, draggableId } = result;
+    if (!destination) {
+      return;
+    }
+    if (destination.droppableId === source.droppableId && destination.index === source.index) {
+      return;
+    }
+
+    const newTodoIds = Array.from(todoIds);
+    newTodoIds.splice(source.index, 1);
+    newTodoIds.splice(destination.index, 0, draggableId);
+    changeTodosOrder(newTodoIds, todos, dispatch);
     // const newTodos = Array.from(todos);
     // newTodos.sort((a, b) => {
     //   return newTodoIds.indexOf(a.id) - newTodoIds.indexOf(b.id);

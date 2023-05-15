@@ -6,15 +6,17 @@ import {
   DeleteCompleteAction,
   FetchTodosAction,
   FilterAction,
-  InitTodosAction,
+  InitAction,
+  InitTodoIdsAction,
 } from './interfaces';
 
 export type Action =
+  | InitAction
   | FetchTodosAction
-  | InitTodosAction
   | AddAction
   | ChangeAction
   | DeleteAction
   | DeleteCompleteAction
   | FilterAction
+  | InitTodoIdsAction
   | ChangeOrderAction;

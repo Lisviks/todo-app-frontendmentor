@@ -11,18 +11,18 @@ export interface Todo {
 export interface State {
   todos: Todo[];
   filter: string;
-  todoIds: number[];
+  todoIds: { _id: string; ids: string[] };
+}
+
+export interface InitAction {
+  type: 'INIT';
+  todos: Todo[];
+  todoIds: { _id: string; ids: string[] };
 }
 
 export interface FetchTodosAction {
   type: 'FETCH_TODOS';
   todos: Todo[];
-}
-
-export interface InitTodosAction {
-  type: 'INIT_TODOS';
-  todos: Todo[];
-  todoIds: number[];
 }
 
 export interface AddAction {
@@ -47,6 +47,14 @@ export interface DeleteCompleteAction {
 export interface FilterAction {
   type: 'FILTER_TODO';
   filter: string;
+}
+
+export interface InitTodoIdsAction {
+  type: 'FETCH_TODO_IDS';
+  todoIds: {
+    _id: string;
+    ids: string[];
+  };
 }
 
 export interface ChangeOrderAction {

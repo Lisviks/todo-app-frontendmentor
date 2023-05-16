@@ -17,6 +17,7 @@ export const addTodo = async (text: string, dispatch: React.Dispatch<any>) => {
   });
   const data = await res.json();
   dispatch({ type: 'ADD', todo: data.todo });
+  return data.todo;
 };
 
 export const deleteTodo = async (id: string, dispatch: React.Dispatch<any>) => {
@@ -51,6 +52,8 @@ export const fetchTodoIds = async (dispatch: React.Dispatch<any>) => {
 };
 
 export const saveTodoIds = async (id: string, todoIds: string[]) => {
+  console.log(id);
+  console.log(todoIds);
   const res = await fetch(`/api/todo-ids?id=${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },

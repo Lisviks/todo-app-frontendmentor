@@ -1,18 +1,24 @@
-import { useTodosDispatch } from '@/context/TodosContext';
-import { addTodo } from '@/context/actions';
+import { useTodos, useTodosDispatch } from '@/context/TodosContext';
+import { addTodo, saveTodoIds } from '@/context/actions';
 import React, { useState } from 'react';
 
 export default function AddTodo() {
   const [text, setText] = useState('');
   const dispatch = useTodosDispatch();
+  const {
+    todoIds: { _id, ids },
+  } = useTodos();
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') handleAddTodo();
   };
 
-  const handleAddTodo = () => {
+  const handleAddTodo = async () => {
     if (text.length > 0) {
-      addTodo(text, dispatch);
+      const todo = await addTodo(text, dispatch);
+      const updatedTodoIds = Array.from(ids);
+      updatedTodoIds.push(todo._id);
+      saveTodoIds(_id, updatedTodoIds);
       setText('');
     }
   };

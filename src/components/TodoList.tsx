@@ -1,14 +1,13 @@
 import { useTodos, useTodosDispatch } from '@/context/TodosContext';
 import ListItem from './ListItem';
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
-import { changeTodosOrder } from '@/context/actions';
-import { useEffect } from 'react';
+import { changeTodosOrder, saveTodoIds } from '@/context/actions';
 
 export default function TodoList() {
   const {
     todos,
     filter,
-    todoIds: { ids: todoIds },
+    todoIds: { _id, ids: todoIds },
   } = useTodos();
   const dispatch = useTodosDispatch();
 
@@ -30,6 +29,7 @@ export default function TodoList() {
     newTodoIds.splice(source.index, 1);
     newTodoIds.splice(destination.index, 0, draggableId);
     changeTodosOrder(newTodoIds, todos, dispatch);
+    saveTodoIds(_id, newTodoIds);
     // const newTodos = Array.from(todos);
     // newTodos.sort((a, b) => {
     //   return newTodoIds.indexOf(a.id) - newTodoIds.indexOf(b.id);

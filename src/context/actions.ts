@@ -50,7 +50,7 @@ export const fetchTodoIds = async (dispatch: React.Dispatch<any>) => {
   return data;
 };
 
-export const saveTodoIds = async (id: Types.ObjectId, todoIds: string[], dispatch: React.Dispatch<any>) => {
+export const saveTodoIds = async (id: string, todoIds: string[]) => {
   const res = await fetch(`/api/todo-ids?id=${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
@@ -58,7 +58,6 @@ export const saveTodoIds = async (id: Types.ObjectId, todoIds: string[], dispatc
   });
   const data = await res.json();
   console.log(data);
-  // dispatch({ type: 'UPDATE_TODO_IDS', todo: data.todo });
 };
 
 // export const initTodoIds = (todos: Todo[], dispatch: React.Dispatch<any>) => {
@@ -93,7 +92,7 @@ export const changeTodosOrder = (todoIds: string[], todos: Todo[], dispatch: Rea
     return todoIds.indexOf(a.id) - todoIds.indexOf(b.id);
   });
   console.log(newTodos);
-  // dispatch({ type: 'CHANGE_ORDER', newTodos, newTodoIds: todoIds });
+  dispatch({ type: 'CHANGE_ORDER', newTodos, newTodoIds: todoIds });
 
   return { newTodos, todoIds };
 };

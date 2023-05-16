@@ -10,7 +10,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(200).json({ todoIds: todoIds[0] });
       break;
     case 'PUT':
-      const updatedIds = await TodoIdsModel.findByIdAndUpdate({ _id: req.query.id }, { ids: req.body.ids });
+      const updatedIds = await TodoIdsModel.findByIdAndUpdate(
+        { _id: req.query.id },
+        { ids: req.body.ids },
+        { new: true }
+      );
       res.status(201).json({ todoIds: updatedIds });
       break;
     default:

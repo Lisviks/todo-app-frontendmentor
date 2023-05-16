@@ -99,3 +99,10 @@ export const changeTodosOrder = (todoIds: string[], todos: Todo[], dispatch: Rea
 
   return { newTodos, todoIds };
 };
+
+export const deleteTodoId = async (id: string, dispatch: React.Dispatch<any>) => {
+  await fetch(`/api/todo-ids?id=${id}`, {
+    method: 'DELETE',
+  });
+  dispatch({ type: 'DELETE_TODO_ID', todoId: id });
+};

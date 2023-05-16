@@ -4,6 +4,7 @@ import {
   ChangeOrderAction,
   DeleteAction,
   DeleteCompleteAction,
+  DeleteTodoIdAction,
   FetchTodosAction,
   FilterAction,
   InitAction,
@@ -19,4 +20,5 @@ export type Action =
   | DeleteCompleteAction
   | FilterAction
   | InitTodoIdsAction
-  | ChangeOrderAction;
+  | ChangeOrderAction
+  | DeleteTodoIdAction;

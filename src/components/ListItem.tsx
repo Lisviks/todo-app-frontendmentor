@@ -4,13 +4,18 @@ import Checkbox from './Checkbox';
 import { useTodosDispatch } from '@/context/TodosContext';
 import { Todo } from '@/interfaces';
 import { Draggable } from 'react-beautiful-dnd';
-import { completeTodo, deleteTodo } from '@/context/actions';
+import { completeTodo, deleteTodo, deleteTodoId } from '@/context/actions';
 
 export default function ListItem({ text, complete, id, index }: Todo & { index: number }) {
   const dispatch = useTodosDispatch();
 
   const handleComplete = () => {
     completeTodo(id, !complete, dispatch);
+  };
+
+  const handleDeleteTodo = () => {
+    deleteTodo(id, dispatch);
+    deleteTodoId(id, dispatch);
   };
 
   return (
@@ -24,7 +29,7 @@ export default function ListItem({ text, complete, id, index }: Todo & { index: 
         >
           <Checkbox complete={complete} handleComplete={handleComplete} />
           <p>{text}</p>
-          <Image src={crossIcon} alt='delete todo' onClick={() => deleteTodo(id, dispatch)} />
+          <Image src={crossIcon} alt='delete todo' onClick={handleDeleteTodo} />
         </li>
       )}
     </Draggable>

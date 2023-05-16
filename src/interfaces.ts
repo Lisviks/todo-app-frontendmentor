@@ -63,6 +63,11 @@ export interface ChangeOrderAction {
   newTodoIds: [];
 }
 
+export interface DeleteTodoIdAction {
+  type: 'DELETE_TODO_ID';
+  todoId: string;
+}
+
 export interface CheckboxInterface {
   complete: boolean;
   handleComplete: Function;

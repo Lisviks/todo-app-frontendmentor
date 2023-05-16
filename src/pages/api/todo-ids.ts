@@ -17,6 +17,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       );
       res.status(201).json({ todoIds: updatedIds });
       break;
+    case 'DELETE':
+      const ids = await TodoIdsModel.find();
+      const filteredIds = ids[0].ids.filter((id: string) => id !== req.query.id);
+      const updated = await TodoIdsModel.findByIdAndUpdate({ _id: ids[0]._id }, { ids: filteredIds }, { new: true });
+      res.status(200).json({ todoIds: updated });
+      break;
     default:
       res.setHeader('Allow', ['GET', 'POST', 'DELETE', 'PUT']);
       res.status(405).end(`Method ${method} Not Allowed`);

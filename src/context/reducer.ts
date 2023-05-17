@@ -6,9 +6,6 @@ export const todosReducer = (state: State, action: Action) => {
     case 'INIT': {
       return { ...state, todos: action.todos, todoIds: action.todoIds };
     }
-    case 'FETCH_TODOS': {
-      return { ...state, todos: action.todos };
-    }
     case 'ADD': {
       return { ...state, todos: [...state.todos, action.todo] };
     }

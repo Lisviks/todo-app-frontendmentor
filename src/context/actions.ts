@@ -50,13 +50,11 @@ export const fetchTodoIds = async (dispatch: React.Dispatch<any>) => {
 };
 
 export const saveTodoIds = async (id: string, todoIds: string[]) => {
-  const res = await fetch(`/api/todo-ids?id=${id}`, {
+  await fetch(`/api/todo-ids?id=${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ ids: todoIds }),
   });
-  const data = await res.json();
-  console.log(data);
 };
 
 export const initTodos = async (dispatch: React.Dispatch<any>) => {

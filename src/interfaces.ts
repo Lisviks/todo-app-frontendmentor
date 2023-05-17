@@ -20,11 +20,6 @@ export interface InitAction {
   todoIds: { _id: string; ids: string[] };
 }
 
-export interface FetchTodosAction {
-  type: 'FETCH_TODOS';
-  todos: Todo[];
-}
-
 export interface AddAction {
   type: 'ADD';
   todo: Todo;

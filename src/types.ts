@@ -5,7 +5,6 @@ import {
   DeleteAction,
   DeleteCompleteAction,
   DeleteTodoIdAction,
-  FetchTodosAction,
   FilterAction,
   InitAction,
   InitTodoIdsAction,
@@ -13,7 +12,6 @@ import {
 
 export type Action =
   | InitAction
-  | FetchTodosAction
   | AddAction
   | ChangeAction
   | DeleteAction

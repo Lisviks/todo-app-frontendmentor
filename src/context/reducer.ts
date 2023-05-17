@@ -40,7 +40,7 @@ export const todosReducer = (state: State, action: Action) => {
       return { ...state, todos: action.newTodos, todoIds: { ...state.todoIds, ids: action.newTodoIds } };
     }
     case 'DELETE_TODO_ID': {
-      return { ...state, todoIds: { ids: state.todoIds.ids.filter((id) => id !== action.todoId) } };
+      return { ...state, todoIds: { ...state.todoIds, ids: state.todoIds.ids.filter((id) => id !== action.todoId) } };
     }
     default: {
       throw Error('Unknown action: ' + JSON.stringify(action));

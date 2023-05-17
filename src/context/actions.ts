@@ -1,11 +1,9 @@
 import { Todo } from '@/interfaces';
-import { Types } from 'mongoose';
 import React from 'react';
 
-export const fetchTodos = async (dispatch: React.Dispatch<any>) => {
+const fetchTodos = async () => {
   const res = await fetch('/api/todos');
   const data = await res.json();
-  // dispatch({ type: 'FETCH_TODOS', todos: data.todos });
   return data;
 };
 
@@ -52,8 +50,6 @@ export const fetchTodoIds = async (dispatch: React.Dispatch<any>) => {
 };
 
 export const saveTodoIds = async (id: string, todoIds: string[]) => {
-  console.log(id);
-  console.log(todoIds);
   const res = await fetch(`/api/todo-ids?id=${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
@@ -63,38 +59,21 @@ export const saveTodoIds = async (id: string, todoIds: string[]) => {
   console.log(data);
 };
 
-// export const initTodoIds = (todos: Todo[], dispatch: React.Dispatch<any>) => {
-//   const localStorageTodoIds = localStorage.getItem('FEM-todo-ids');
-//   let todoIds;
-//   if (!localStorageTodoIds) {
-//     todoIds = todos.map((todo) => todo.id);
-//     localStorage.setItem('FEM-todo-ids', JSON.stringify(todoIds));
-//   } else {
-//     todoIds = JSON.parse(localStorageTodoIds);
-//     changeTodosOrder(todoIds, todos, dispatch);
-//   }
-//   dispatch({ type: 'INIT_TODO_IDS', todoIds });
-// };
-
 export const initTodos = async (dispatch: React.Dispatch<any>) => {
-  const { todos } = await fetchTodos(dispatch);
+  const { todos } = await fetchTodos();
   const {
     todoIds: { _id, ids },
   } = await fetchTodoIds(dispatch);
-  console.log(todos);
-  console.log(ids);
   const { newTodos } = changeTodosOrder(ids, todos, dispatch);
 
-  dispatch({ type: 'INIT', todos: newTodos, todoIds: { _id: _id, ids: ids } });
+  dispatch({ type: 'INIT', todos: newTodos, todoIds: { _id, ids } });
 };
 
 export const changeTodosOrder = (todoIds: string[], todos: Todo[], dispatch: React.Dispatch<any>) => {
   const newTodos = Array.from(todos);
-  console.log(newTodos);
   newTodos.sort((a, b) => {
     return todoIds.indexOf(a.id) - todoIds.indexOf(b.id);
   });
-  console.log(newTodos);
   dispatch({ type: 'CHANGE_ORDER', newTodos, newTodoIds: todoIds });
 
   return { newTodos, todoIds };

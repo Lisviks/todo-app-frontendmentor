@@ -30,11 +30,6 @@ export default function TodoList() {
     newTodoIds.splice(destination.index, 0, draggableId);
     changeTodosOrder(newTodoIds, todos, dispatch);
     saveTodoIds(_id, newTodoIds);
-    // const newTodos = Array.from(todos);
-    // newTodos.sort((a, b) => {
-    //   return newTodoIds.indexOf(a.id) - newTodoIds.indexOf(b.id);
-    // });
-    // dispatch({ type: 'CHANGE_ORDER', newTodos, newTodoIds });
   };
 
   return (

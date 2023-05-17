@@ -34,7 +34,7 @@ export const completeTodo = async (id: string, complete: boolean, dispatch: Reac
     body: JSON.stringify({ complete }),
   });
   const data = await res.json();
-  // dispatch({ type: 'CHANGE', todo: data.todo });
+  dispatch({ type: 'CHANGE', todo: data.todo });
 };
 
 export const deleteCompleteTodos = async (dispatch: React.Dispatch<any>) => {

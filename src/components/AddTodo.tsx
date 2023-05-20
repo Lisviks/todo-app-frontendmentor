@@ -1,5 +1,6 @@
 import { useTodos, useTodosDispatch } from '@/context/TodosContext';
 import { addTodo, saveTodoIds } from '@/context/actions';
+import { useSession } from 'next-auth/react';
 import React, { useState } from 'react';
 
 export default function AddTodo() {
@@ -8,6 +9,7 @@ export default function AddTodo() {
   const {
     todoIds: { _id, ids },
   } = useTodos();
+  const { data: session } = useSession();
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') handleAddTodo();
@@ -15,7 +17,7 @@ export default function AddTodo() {
 
   const handleAddTodo = async () => {
     if (text.length > 0) {
-      const todo = await addTodo(text, dispatch);
+      const todo = await addTodo(text, session?.user?.email as string, dispatch);
       const updatedTodoIds = Array.from(ids);
       updatedTodoIds.push(todo._id);
       saveTodoIds(_id, updatedTodoIds);

@@ -1,3 +1,5 @@
+import MongooseAdapter from '@/lib/auth-adapter/mongoose-adapter/intedx';
+import dbConnect from '@/lib/dbConnect';
 import NextAuth from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
 
@@ -17,4 +19,5 @@ export default NextAuth({
     }),
   ],
   secret: getEnvVar('NEXTAUTH_SECRET'),
+  adapter: MongooseAdapter(dbConnect),
 });

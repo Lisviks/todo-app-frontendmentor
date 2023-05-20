@@ -8,6 +8,7 @@ import {
   FilterAction,
   InitAction,
   InitTodoIdsAction,
+  UpdateTodoIdsAction,
 } from './interfaces';
 
 export type Action =
@@ -19,4 +20,5 @@ export type Action =
   | FilterAction
   | InitTodoIdsAction
   | ChangeOrderAction
+  | UpdateTodoIdsAction
   | DeleteTodoIdAction;

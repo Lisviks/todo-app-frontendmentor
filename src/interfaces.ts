@@ -58,6 +58,11 @@ export interface ChangeOrderAction {
   newTodoIds: [];
 }
 
+export interface UpdateTodoIdsAction {
+  type: 'UPDATE_TODO_IDS';
+  todoIds: string[];
+}
+
 export interface DeleteTodoIdAction {
   type: 'DELETE_TODO_ID';
   todoId: string;

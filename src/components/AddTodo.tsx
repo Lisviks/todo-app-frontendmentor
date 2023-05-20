@@ -7,7 +7,7 @@ export default function AddTodo() {
   const [text, setText] = useState('');
   const dispatch = useTodosDispatch();
   const {
-    todoIds: { _id, ids },
+    todoIds: { ids },
   } = useTodos();
   const { data: session } = useSession();
 
@@ -20,7 +20,7 @@ export default function AddTodo() {
       const todo = await addTodo(text, session?.user?.id as string, dispatch);
       const updatedTodoIds = Array.from(ids);
       updatedTodoIds.push(todo._id);
-      saveTodoIds(_id, updatedTodoIds);
+      saveTodoIds(session?.user.id as string, updatedTodoIds, dispatch);
       setText('');
     }
   };

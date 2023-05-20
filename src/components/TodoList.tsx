@@ -2,14 +2,16 @@ import { useTodos, useTodosDispatch } from '@/context/TodosContext';
 import ListItem from './ListItem';
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
 import { changeTodosOrder, saveTodoIds } from '@/context/actions';
+import { useSession } from 'next-auth/react';
 
 export default function TodoList() {
   const {
     todos,
     filter,
-    todoIds: { _id, ids: todoIds },
+    todoIds: { ids },
   } = useTodos();
   const dispatch = useTodosDispatch();
+  const { data: session } = useSession();
 
   const filteredTodos = todos.filter((todo) => {
     if (filter === 'active') return !todo.complete;
@@ -25,11 +27,11 @@ export default function TodoList() {
       return;
     }
 
-    const newTodoIds = Array.from(todoIds);
+    const newTodoIds = Array.from(ids);
     newTodoIds.splice(source.index, 1);
     newTodoIds.splice(destination.index, 0, draggableId);
     changeTodosOrder(newTodoIds, todos, dispatch);
-    saveTodoIds(_id, newTodoIds);
+    saveTodoIds(session?.user.id as string, newTodoIds, dispatch);
   };
 
   return (

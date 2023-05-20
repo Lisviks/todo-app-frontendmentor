@@ -1,5 +1,4 @@
 import { Todo } from '@/interfaces';
-import { useSession } from 'next-auth/react';
 import React from 'react';
 
 const fetchTodos = async (userId: string) => {
@@ -15,7 +14,6 @@ export const addTodo = async (text: string, userId: string, dispatch: React.Disp
     body: JSON.stringify({ text, userId }),
   });
   const data = await res.json();
-  console.log(data);
   dispatch({ type: 'ADD', todo: data.todo });
   return data.todo;
 };
@@ -44,26 +42,30 @@ export const deleteCompleteTodos = async (dispatch: React.Dispatch<any>) => {
   dispatch({ type: 'DELETE_COMPLETE' });
 };
 
-export const fetchTodoIds = async (dispatch: React.Dispatch<any>) => {
-  const res = await fetch(`/api/todo-ids`);
+export const fetchTodoIds = async (userId: string, dispatch: React.Dispatch<any>) => {
+  const res = await fetch(`/api/todo-ids?userId=${userId}`);
   const data = await res.json();
+  if (!data.todoIds) {
+    const todoIds = { _id: userId, ids: [] };
+    dispatch({ type: 'FETCH_TODO_IDS', todoIds: { _id: userId, ids: [] } });
+    return todoIds;
+  }
   dispatch({ type: 'FETCH_TODO_IDS', todoIds: { _id: data.todoIds._id, ids: data.todoIds.ids } });
-  return data;
+  return data.todoIds;
 };
 
-export const saveTodoIds = async (id: string, todoIds: string[]) => {
-  await fetch(`/api/todo-ids?id=${id}`, {
+export const saveTodoIds = async (id: string, todoIds: string[], dispatch: React.Dispatch<any>) => {
+  await fetch(`/api/todo-ids?userId=${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ ids: todoIds }),
   });
+  dispatch({ type: 'UPDATE_TODO_IDS', todoIds });
 };
 
 export const initTodos = async (userId: string, dispatch: React.Dispatch<any>) => {
   const { todos } = await fetchTodos(userId);
-  const {
-    todoIds: { _id, ids },
-  } = await fetchTodoIds(dispatch);
+  const { _id, ids } = await fetchTodoIds(userId, dispatch);
   const { newTodos } = changeTodosOrder(ids, todos, dispatch);
 
   dispatch({ type: 'INIT', todos: newTodos, todoIds: { _id, ids } });

@@ -36,6 +36,9 @@ export const todosReducer = (state: State, action: Action) => {
     case 'CHANGE_ORDER': {
       return { ...state, todos: action.newTodos, todoIds: { ...state.todoIds, ids: action.newTodoIds } };
     }
+    case 'UPDATE_TODO_IDS': {
+      return { ...state, todoIds: { ...state.todoIds, ids: action.todoIds } };
+    }
     case 'DELETE_TODO_ID': {
       return { ...state, todoIds: { ...state.todoIds, ids: state.todoIds.ids.filter((id) => id !== action.todoId) } };
     }

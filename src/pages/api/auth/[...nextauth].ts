@@ -1,4 +1,4 @@
-import MongooseAdapter from '@/lib/auth-adapter/mongoose-adapter/intedx';
+import MongooseAdapter from '@/lib/auth-adapter/mongoose-adapter';
 import dbConnect from '@/lib/dbConnect';
 import NextAuth from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';

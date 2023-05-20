@@ -22,7 +22,7 @@ export default NextAuth({
   adapter: MongooseAdapter(dbConnect),
   callbacks: {
     session: async ({ session, user }) => {
-      session.user.id = user.id;
+      session.user.id = user.id.toString();
       return Promise.resolve(session);
     },
   },

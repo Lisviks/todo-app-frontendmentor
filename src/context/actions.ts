@@ -7,11 +7,11 @@ const fetchTodos = async () => {
   return data;
 };
 
-export const addTodo = async (text: string, email: string, dispatch: React.Dispatch<any>) => {
+export const addTodo = async (text: string, userId: string, dispatch: React.Dispatch<any>) => {
   const res = await fetch('/api/todos', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ text, userEmail: email }),
+    body: JSON.stringify({ text, userId }),
   });
   const data = await res.json();
   console.log(data);

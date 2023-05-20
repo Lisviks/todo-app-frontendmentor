@@ -17,7 +17,7 @@ export default function AddTodo() {
 
   const handleAddTodo = async () => {
     if (text.length > 0) {
-      const todo = await addTodo(text, session?.user?.email as string, dispatch);
+      const todo = await addTodo(text, session?.user?.id as string, dispatch);
       const updatedTodoIds = Array.from(ids);
       updatedTodoIds.push(todo._id);
       saveTodoIds(_id, updatedTodoIds);

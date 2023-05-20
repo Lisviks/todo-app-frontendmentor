@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       }
       break;
     case 'POST':
-      const todo = await TodoModel.create({ text: req.body.text, userEmail: req.body.userEmail, complete: false });
+      const todo = await TodoModel.create({ text: req.body.text, userId: req.body.userId, complete: false });
       res.status(201).json({ todo });
       break;
     case 'DELETE':

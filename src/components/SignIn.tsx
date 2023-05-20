@@ -2,9 +2,6 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 
 export default function SignIn() {
   const { data: session } = useSession();
-  if (session) {
-    console.log('SESSION', session);
-  }
 
   return (
     <div className='sign-in'>

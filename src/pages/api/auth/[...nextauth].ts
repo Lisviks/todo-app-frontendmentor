@@ -20,4 +20,10 @@ export default NextAuth({
   ],
   secret: getEnvVar('NEXTAUTH_SECRET'),
   adapter: MongooseAdapter(dbConnect),
+  callbacks: {
+    session: async ({ session, user }) => {
+      session.user.id = user.id;
+      return Promise.resolve(session);
+    },
+  },
 });

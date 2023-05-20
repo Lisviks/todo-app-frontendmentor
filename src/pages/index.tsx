@@ -1,6 +1,7 @@
 import AddTodo from '@/components/AddTodo';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import SignIn from '@/components/SignIn';
 import TodoList from '@/components/TodoList';
 import { TodosProvider } from '@/context/TodosContext';
 import { GetServerSideProps } from 'next';
@@ -13,6 +14,7 @@ export default function Home() {
       <main>
         <div className='app'>
           <Header />
+          <SignIn />
           <TodosProvider>
             <AddTodo />
             <TodoList />

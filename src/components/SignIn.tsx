@@ -2,7 +2,7 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 
 export default function SignIn() {
   const { data: session } = useSession();
-
+  console.log(session);
   return (
     <div className='sign-in'>
       {!session && (
@@ -24,7 +24,7 @@ export default function SignIn() {
         <>
           <span>
             <small>Signed in as </small>
-            <strong>{session.user.email ?? session.user.name}</strong>
+            <strong>{session.user.name ?? session.user.email}</strong>
           </span>
           <a
             href={`/api/auth/signout`}

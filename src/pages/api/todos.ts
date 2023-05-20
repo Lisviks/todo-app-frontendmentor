@@ -1,4 +1,3 @@
-import dbConnect from '@/lib/dbConnect';
 import TodoModel from '@/models/Todo';
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -8,7 +7,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (method) {
     case 'GET':
       try {
-        dbConnect();
         const todos = await TodoModel.find();
         res.status(200).json({ todos });
       } catch (error) {

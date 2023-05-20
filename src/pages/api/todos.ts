@@ -7,7 +7,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (method) {
     case 'GET':
       try {
-        const todos = await TodoModel.find();
+        const { userId } = req.query;
+        const todos = await TodoModel.find({ userId });
         res.status(200).json({ todos });
       } catch (error) {
         console.error(error);

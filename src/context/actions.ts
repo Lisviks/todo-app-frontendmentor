@@ -1,8 +1,9 @@
 import { Todo } from '@/interfaces';
+import { useSession } from 'next-auth/react';
 import React from 'react';
 
-const fetchTodos = async () => {
-  const res = await fetch('/api/todos');
+const fetchTodos = async (userId: string) => {
+  const res = await fetch(`/api/todos?userId=${userId}`);
   const data = await res.json();
   return data;
 };
@@ -58,8 +59,8 @@ export const saveTodoIds = async (id: string, todoIds: string[]) => {
   });
 };
 
-export const initTodos = async (dispatch: React.Dispatch<any>) => {
-  const { todos } = await fetchTodos();
+export const initTodos = async (userId: string, dispatch: React.Dispatch<any>) => {
+  const { todos } = await fetchTodos(userId);
   const {
     todoIds: { _id, ids },
   } = await fetchTodoIds(dispatch);

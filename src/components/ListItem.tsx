@@ -5,9 +5,11 @@ import { useTodosDispatch } from '@/context/TodosContext';
 import { Todo } from '@/interfaces';
 import { Draggable } from 'react-beautiful-dnd';
 import { completeTodo, deleteTodo, deleteTodoId } from '@/context/actions';
+import { useSession } from 'next-auth/react';
 
 export default function ListItem({ text, complete, id, index }: Todo & { index: number }) {
   const dispatch = useTodosDispatch();
+  const { data: session } = useSession();
 
   const handleComplete = () => {
     completeTodo(id, !complete, dispatch);
@@ -15,7 +17,7 @@ export default function ListItem({ text, complete, id, index }: Todo & { index: 
 
   const handleDeleteTodo = () => {
     deleteTodo(id, dispatch);
-    deleteTodoId(id, dispatch);
+    deleteTodoId(session?.user.id as string, id, dispatch);
   };
 
   return (

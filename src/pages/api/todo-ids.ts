@@ -26,10 +26,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       break;
     case 'DELETE':
       {
-        const { userId } = req.query;
-        const ids = await TodoIdsModel.find({ userId });
-        const filteredIds = ids[0].ids.filter((id: string) => id !== req.query.id);
-        const updated = await TodoIdsModel.findByIdAndUpdate({ _id: ids[0]._id }, { ids: filteredIds }, { new: true });
+        const { userId, id: todoId } = req.query;
+        const ids = await TodoIdsModel.findOne({ userId });
+        const filteredIds = ids.ids.filter((id: string) => id !== todoId);
+        const updated = await TodoIdsModel.findOneAndUpdate({ userId }, { ids: filteredIds }, { new: true });
         res.status(200).json({ todoIds: updated });
       }
       break;

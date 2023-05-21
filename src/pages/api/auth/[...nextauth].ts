@@ -2,6 +2,7 @@ import MongooseAdapter from '@/lib/auth-adapter/mongoose-adapter';
 import dbConnect from '@/lib/dbConnect';
 import NextAuth from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
+import GoogleProvider from 'next-auth/providers/google';
 
 const getEnvVar = (variable: string): string => {
   const val = process.env[variable];
@@ -16,6 +17,10 @@ export default NextAuth({
     GithubProvider({
       clientId: getEnvVar('GITHUB_ID'),
       clientSecret: getEnvVar('GITHUB_SECRET'),
+    }),
+    GoogleProvider({
+      clientId: getEnvVar('GOOGLE_CLIENT_ID'),
+      clientSecret: getEnvVar('GOOGLE_CLIENT_SECRET'),
     }),
   ],
   secret: getEnvVar('NEXTAUTH_SECRET'),

@@ -1,5 +1,4 @@
 import clientPromise from '@/lib/mongodb';
-import TodoIdsModel from '@/models/TodoIds';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {

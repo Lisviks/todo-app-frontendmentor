@@ -27,19 +27,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         res.status(201).json({ todoIds: updatedIds });
       }
       break;
-    case 'DELETE':
-      // TODO: Fix deleting todo ids
-      {
-        const { userId, id: todoId } = req.query;
-        const ids = await TodoIdsModel.findOne({ userId });
-        const filteredIds = ids.ids.filter((id: string) => id !== todoId);
-        const updated = await TodoIdsModel.findOneAndUpdate({ userId }, { ids: filteredIds }, { new: true });
-        res.status(200).json({ todoIds: updated });
-      }
-      break;
     default:
       {
-        res.setHeader('Allow', ['GET', 'DELETE', 'PUT']);
+        res.setHeader('Allow', ['GET', 'PUT']);
         res.status(405).end(`Method ${method} Not Allowed`);
       }
       break;

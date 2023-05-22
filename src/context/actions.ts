@@ -54,8 +54,8 @@ export const fetchTodoIds = async (userId: string, dispatch: React.Dispatch<any>
   return data.todoIds;
 };
 
-export const saveTodoIds = async (id: string, todoIds: string[], dispatch: React.Dispatch<any>) => {
-  await fetch(`/api/todo-ids?userId=${id}`, {
+export const saveTodoIds = async (userId: string, todoIds: string[], dispatch: React.Dispatch<any>) => {
+  await fetch(`/api/todo-ids?userId=${userId}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ ids: todoIds }),
@@ -79,11 +79,4 @@ export const changeTodosOrder = (todoIds: string[], todos: Todo[], dispatch: Rea
   dispatch({ type: 'CHANGE_ORDER', newTodos, newTodoIds: todoIds });
 
   return { newTodos, todoIds };
-};
-
-export const deleteTodoId = async (userId: string, id: string, dispatch: React.Dispatch<any>) => {
-  await fetch(`/api/todo-ids?userId=${userId}&id=${id}`, {
-    method: 'DELETE',
-  });
-  dispatch({ type: 'DELETE_TODO_ID', todoId: id });
 };

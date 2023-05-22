@@ -1,14 +1,17 @@
 import Image from 'next/image';
 import crossIcon from '@/../public/images/icon-cross.svg';
 import Checkbox from './Checkbox';
-import { useTodosDispatch } from '@/context/TodosContext';
+import { useTodos, useTodosDispatch } from '@/context/TodosContext';
 import { Todo } from '@/interfaces';
 import { Draggable } from 'react-beautiful-dnd';
-import { completeTodo, deleteTodo, deleteTodoId } from '@/context/actions';
+import { completeTodo, deleteTodo, saveTodoIds } from '@/context/actions';
 import { useSession } from 'next-auth/react';
 
 export default function ListItem({ text, complete, id, index }: Todo & { index: number }) {
   const dispatch = useTodosDispatch();
+  const {
+    todoIds: { ids },
+  } = useTodos();
   const { data: session } = useSession();
 
   const handleComplete = () => {
@@ -16,8 +19,9 @@ export default function ListItem({ text, complete, id, index }: Todo & { index: 
   };
 
   const handleDeleteTodo = () => {
+    const filteredTodoIds = ids.filter((i) => i !== id);
     deleteTodo(id, dispatch);
-    deleteTodoId(session?.user.id as string, id, dispatch);
+    saveTodoIds(session?.user.id as string, filteredTodoIds, dispatch);
   };
 
   return (

@@ -63,11 +63,6 @@ export interface UpdateTodoIdsAction {
   todoIds: string[];
 }
 
-export interface DeleteTodoIdAction {
-  type: 'DELETE_TODO_ID';
-  todoId: string;
-}
-
 export interface CheckboxInterface {
   complete: boolean;
   handleComplete: Function;

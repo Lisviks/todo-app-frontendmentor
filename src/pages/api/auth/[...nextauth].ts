@@ -1,5 +1,3 @@
-import MongooseAdapter from '@/lib/auth-adapter/mongoose-adapter';
-import dbConnect from '@/lib/dbConnect';
 import clientPromise from '@/lib/mongodb';
 import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
 import NextAuth from 'next-auth';
@@ -26,7 +24,6 @@ export default NextAuth({
     }),
   ],
   secret: getEnvVar('NEXTAUTH_SECRET'),
-  // adapter: MongooseAdapter(dbConnect),
   adapter: MongoDBAdapter(clientPromise),
   callbacks: {
     session: async ({ session, user }) => {

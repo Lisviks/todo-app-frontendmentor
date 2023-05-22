@@ -1,45 +1,70 @@
-import TodoModel from '@/models/Todo';
+import clientPromise from '@/lib/mongodb';
+import { ObjectId } from 'mongodb';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
+  const client = await clientPromise;
+  const db = client.db();
+  const collection = db.collection('todos');
 
   switch (method) {
     case 'GET':
-      try {
+      {
         const { userId } = req.query;
-        const todos = await TodoModel.find({ userId });
+        const todos = await collection
+          .find({ userId })
+          .project({
+            _id: 0,
+            id: '$_id',
+            userId: 1,
+            text: 1,
+            complete: 1,
+          })
+          .toArray();
         res.status(200).json({ todos });
-      } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
       }
       break;
     case 'POST':
-      const todo = await TodoModel.create({ text: req.body.text, userId: req.body.userId, complete: false });
-      res.status(201).json({ todo });
+      {
+        const result = await collection.insertOne({ text: req.body.text, userId: req.body.userId, complete: false });
+        const todo = await collection.findOne({ _id: new ObjectId(result.insertedId) });
+        if (todo) {
+          todo.id = todo?._id.toString();
+        }
+        res.status(201).json({ todo });
+      }
       break;
     case 'DELETE':
-      if (req.query.id) {
-        await TodoModel.deleteOne({ _id: req.query.id });
-        res.status(204).end();
-      }
-      if (req.query.complete) {
-        const deleteCount = await TodoModel.deleteMany({ complete: true });
-        console.log(deleteCount);
-        res.status(200).json({ deleteCount });
+      {
+        if (req.query.id) {
+          const result = await collection.deleteOne({ _id: new ObjectId(String(req.query.id)) });
+          res.status(204).end();
+        }
+        if (req.query.complete) {
+          const result = await collection.deleteMany({ complete: true });
+          res.status(204).end();
+        }
       }
       break;
     case 'PUT':
-      const updatedTodo = await TodoModel.findOneAndUpdate(
-        { _id: req.query.id },
-        { complete: req.body.complete },
-        { new: true }
-      );
-      res.status(200).json({ todo: updatedTodo });
+      {
+        const result = await collection.updateOne(
+          { _id: new ObjectId(String(req.query.id)) },
+          { $set: { complete: req.body.complete } }
+        );
+        if (result.acknowledged) {
+          const todo = await collection.findOne({ _id: new ObjectId(String(req.query.id)) });
+          if (todo) {
+            todo.id = todo?._id.toString();
+          }
+          return res.status(200).json({ todo });
+        }
+        res.status(400).json({ message: 'Something went wrong, Try again.' });
+      }
       break;
     default:
-      res.setHeader('Allow', ['GET', 'POST', 'DELETE']);
+      res.setHeader('Allow', ['GET', 'POST', 'PUT', 'DELETE']);
       res.status(405).end(`Method ${method} Not Allowed`);
       break;
   }

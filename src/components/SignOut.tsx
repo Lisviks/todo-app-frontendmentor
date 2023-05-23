@@ -1,25 +1,10 @@
 import { signIn, signOut, useSession } from 'next-auth/react';
 
-export default function SignIn() {
+export default function SignOut() {
   const { data: session } = useSession();
 
   return (
     <div className='sign-in'>
-      {!session && (
-        <>
-          <span>You are not signed in</span>
-          <a
-            href={`/api/auth/signin`}
-            className='btn'
-            onClick={(e) => {
-              e.preventDefault();
-              signIn();
-            }}
-          >
-            Sign in
-          </a>
-        </>
-      )}
       {session?.user && (
         <>
           <span>

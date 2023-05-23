@@ -35,8 +35,8 @@ export const completeTodo = async (id: string, complete: boolean, dispatch: Reac
   dispatch({ type: 'CHANGE', todo: data.todo });
 };
 
-export const deleteCompleteTodos = async (dispatch: React.Dispatch<any>) => {
-  await fetch('/api/todos?complete=true', {
+export const deleteCompleteTodos = async (userId: string, dispatch: React.Dispatch<any>) => {
+  await fetch(`/api/todos?userId=${userId}&complete=true`, {
     method: 'DELETE',
   });
   dispatch({ type: 'DELETE_COMPLETE' });

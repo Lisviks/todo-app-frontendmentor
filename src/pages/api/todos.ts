@@ -42,7 +42,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           res.status(204).end();
         }
         if (req.query.complete) {
-          const result = await collection.deleteMany({ complete: true });
+          const result = await collection.deleteMany({ userId: req.query.userId, complete: true });
           res.status(204).end();
         }
       }

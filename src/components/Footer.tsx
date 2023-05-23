@@ -22,7 +22,7 @@ export default function Footer() {
         return id;
       }
     });
-    deleteCompleteTodos(dispatch);
+    deleteCompleteTodos(session?.user.id as string, dispatch);
     saveTodoIds(session?.user.id as string, filteredTodoIds, dispatch);
   };
 

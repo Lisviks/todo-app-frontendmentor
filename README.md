@@ -1,8 +1,10 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Frontend Mentor - Todo app solution
+
+This is a solution to the [Todo app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
 ## Getting Started
 
-First, run the development server:
+First update `.env.local.example` and then rename it to `.env.local`. After that start development server:
 
 ```bash
 npm run dev
@@ -12,27 +14,73 @@ yarn dev
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Table of contents
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [Useful resources](#useful-resources)
+- [Author](#author)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Overview
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### The challenge
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Users should be able to:
 
-## Learn More
+- View the optimal layout for the app depending on their device's screen size
+- See hover states for all interactive elements on the page
+- Add new todos to the list
+- Mark todos as complete
+- Delete todos from the list
+- Filter by all/active/complete todos
+- Clear all completed todos
+- Toggle light and dark mode
+- **Bonus**: Drag and drop to reorder items on the list
 
-To learn more about Next.js, take a look at the following resources:
+### Screenshot
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![](./screenshots/dark.png)
+![](./screenshots/light.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Links
 
-## Deploy on Vercel
+- Solution URL: [URL]()
+- Live Site URL: [URL](https://todo-app-frontendmentor-nine.vercel.app/)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## My process
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Built with
+
+- CSS custom properties
+- Flexbox
+- CSS Grid
+- Mobile-first workflow
+- [Next.js](https://nextjs.org/) - React framework
+- [NextAuth](https://next-auth.js.org) - Authentication
+- [MongoDB](https://www.mongodb.com/) - Database
+- [React-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd) - Drag and drop
+- [SASS](https://sass-lang.com/)
+- [Typescript](https://www.typescriptlang.org/)
+
+### Useful resources
+
+- [NextJS](https://nextjs.org/docs)
+- [NextAuth](https://next-auth.js.org/getting-started/introduction) - Used it for authentication
+- [Modal SignIn](https://github.com/nextauthjs/next-auth/issues/178#issuecomment-757513968) - This helped me to make a modal signin
+- [NextJS/Router](https://stackoverflow.com/a/57909885) - This stackoverflow answer helped me with signin modal
+- [MongoDB](https://www.mongodb.com/docs/drivers/node/current/) - MongoDB Node.js docs
+- [Sort array based on another array](https://stackoverflow.com/a/44063445) - This helped me with reordering todos and saving new order
+- [react-beautiful-dnd](https://egghead.io/lessons/react-course-introduction-beautiful-and-accessible-drag-and-drop-with-react-beautiful-dnd) - This helped me to implement drag and drop using `react-beautiful-dnd`
+- [Context/Reducer](https://react.dev/learn/scaling-up-with-reducer-and-context) - This helped me to use context and recuder
+- [Gradient border color](https://codyhouse.co/nuggets/css-gradient-borders) - Helped me to add gradient border color
+
+## Author
+
+- Website - [Add your name here](https://deividas.blog)
+- Frontend Mentor - [@Lisviks](https://www.frontendmentor.io/profile/Lisviks)
+- Twitter - [@DRimkusDev](https://www.twitter.com/DRimkusDev)
+- GitHub - [Lisviks](https://github.com/Lisviks)

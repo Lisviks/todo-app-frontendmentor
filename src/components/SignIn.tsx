@@ -12,7 +12,7 @@ export default function SignIn() {
             href={`/api/auth/signin`}
             className='btn'
             onClick={(e) => {
-              e.preventDefault;
+              e.preventDefault();
               signIn();
             }}
           >
@@ -30,7 +30,7 @@ export default function SignIn() {
             href={`/api/auth/signout`}
             className='btn'
             onClick={(e) => {
-              e.preventDefault;
+              e.preventDefault();
               signOut();
             }}
           >
